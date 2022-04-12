@@ -13,13 +13,16 @@ def palabraInv(ppalabra):
     return palabraInv
 
 def mensajeInv(pfrase):
-    mensajeInv = ""
+    fraseInv = ""
     indice = -1
     frase = pfrase.split(" ")
     for i in frase:
-        mensajeInv += str(palabraInv(frase[indice]))+" "
-        indice -= 1
-    return mensajeInv
+        if indice == -len(frase):
+            fraseInv += str(palabraInv(frase[indice]))
+        else:
+            fraseInv += str(palabraInv(frase[indice]))+" "
+            indice -= 1
+    return fraseInv
 
 def cifBinario(pfrase):
     cifrado = ""
@@ -80,3 +83,70 @@ def cifBinario(pfrase):
             elif j == "z":
                 cifrado += "11001 "
     return cifrado
+
+def cifBinarioDes(pcifrado):
+    frase = ""
+    cifrado = pcifrado.split(" ")
+    for i in cifrado:
+        if i == "*":
+            frase += " "
+        elif i == "00000":
+            frase += "a"
+        elif i == "00001":
+            frase += "b"
+        elif i == "00010":
+            frase += "c"
+        elif i == "00011":
+            frase += "d"
+        elif i == "00100":
+            frase += "e"
+        elif i == "00101":
+            frase += "f"
+        elif i == "00110":
+            frase += "g"
+        elif i == "00111":
+            frase += "h"
+        elif i == "01000":
+            frase += "i"
+        elif i == "01001":
+            frase += "j"
+        elif i == "01010":
+            frase += "k"
+        elif i == "01011":
+            frase += "l"
+        elif i == "01100":
+            frase += "m"
+        elif i == "01101":
+            frase += "n"
+        elif i == "01110":
+            frase += "o"
+        elif i == "01111":
+            frase += "p"
+        elif i == "10000":
+            frase += "q"
+        elif i == "10001":
+            frase += "r"
+        elif i == "10010":
+            frase += "s"
+        elif i == "10011":
+            frase += "t"
+        elif i == "10100":
+            frase += "u"
+        elif i == "10101":
+            frase += "v"
+        elif i == "10110":
+            frase += "w"
+        elif i == "10111":
+            frase += "x"
+        elif i == "11000":
+            frase += "y"
+        elif i == "11001":
+            frase += "z"
+    print(frase)
+    return ""
+
+def cifPorLlave(ppalabra):
+    return ""
+
+def sustVignere(ppalabra, pcifra):
+    return ""
