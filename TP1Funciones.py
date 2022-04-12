@@ -1,4 +1,4 @@
-# Elaborado por Juan Ceballos y Esteban Solano:
+# Elaborado por Juan Ceballos y Esteban Solano
 # Fecha de Creación: 03/04/2022 01:20pm
 # Fecha de última Modificación: 11/04/2022 05:57pm
 # Versión: 3.9.2
@@ -80,7 +80,3 @@ def cifBinario(pfrase):
             elif j == "z":
                 cifrado += "11001 "
     return cifrado
-
-# Definición de Validaciones
-
-# Programa Principal
