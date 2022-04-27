@@ -188,7 +188,6 @@ def descifBinario(pcifrado):
     print(frase)
     return ""
 
-# FALTA EL DESCIFRADO DE ESTA
 def cifPorLlave(pfrase, pllave):
     """
     Funcionalidad: Crea un cifrado al adelantar las letras del mensaje según el valor de una llave (palabra clave).
