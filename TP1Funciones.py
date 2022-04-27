@@ -3,6 +3,13 @@
 # Fecha de última Modificación: 11/04/2022 05:57pm
 # Versión: 3.9.2
 
+# Librería de funciones
+def esPar(pnum):
+    if pnum % 2 == 0:
+        return True
+    else:
+        return False
+
 # Definición de Funciones
 def palabraInv(ppalabra):
     palabraInv = ""
@@ -145,8 +152,59 @@ def cifBinarioDes(pcifrado):
     print(frase)
     return ""
 
-def cifPorLlave(ppalabra):
-    return ""
+# FALTA EL DESCIFRADO DE ESTA
+def cifPorLlave(pfrase, pllave):
+    letraPos = 0
+    llaveValor = 0
+    indice = 0
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    cifrado = ""
+    for i in pfrase:
+        letraPos = 0
+        llaveValor = 0
+        if indice == len(pllave): # Si el indice de la llave es igual a su longitud se resetea
+            indice = 0
+        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto y le asigna un valor numérico
+            if i == j:
+                break
+            letraPos += 1
+        for j in alfabeto: # Determina el valor de la letra de la llave
+            llaveValor += 1
+            if pllave[indice] == j:
+                break
+        if i in alfabeto: # Verifica si el caracter evaluado se encuentra dentro del alfabeto
+            letraPos += llaveValor
+            indice += 1
+            if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
+                letraPos -= 26
+            cifrado += alfabeto[letraPos] # Añade al cifrado la posicion la letra + el valor de la llave
+        else: # Añade al cifrado un espacio en blanco y reseta el indice
+            cifrado += " "
+            indice = 0
+    return cifrado
 
-def sustVignere(ppalabra, pcifra):
-    return ""
+# FALTA EL DESCIFRADO DE ESTA
+def sustVignere(pfrase, pcifra):
+    cifra = str(pcifra)
+    letraPos = 0
+    contador = 1
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    cifrado = ""
+    for i in pfrase:
+        letraPos = 0
+        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto
+            if i == j:
+                break
+            letraPos += 1
+        if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
+            letraPos -= 26
+        if i in alfabeto: # Determina si la letra es par o impar para saber cual cifra utilizar
+            if esPar(contador) == False:
+                letraPos += int(cifra[0])
+            elif esPar(contador) == True:
+                letraPos += int(cifra[-1])
+            contador += 1
+            cifrado += alfabeto[letraPos] # Añade al cifrado la posicion de cada letra obtenida en el alfabeto + el digito de la cifra
+        else: # Añade al cifrado un espacio en blanco
+            cifrado += " "
+    return cifrado
