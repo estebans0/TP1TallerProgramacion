@@ -1,10 +1,18 @@
 # Elaborado por Juan Ceballos y Esteban Solano
 # Fecha de Creación: 03/04/2022 01:20pm
-# Fecha de última Modificación: 11/04/2022 05:57pm
+# Fecha de última Modificación: 11/04/2022 01:37pm
 # Versión: 3.9.2
 
 # Librería de funciones
 def esPar(pnum):
+    """
+    Funcionalidad: Determina si un número entero es par o impar.
+    Entradas:
+    -pnum(int): El número ingresado por el usuario para ser validado.
+    Salidas:
+    -True(bool): Indica que el número es par.
+    -False(bool): Indica que el número es impar.
+    """
     if pnum % 2 == 0:
         return True
     else:
@@ -12,6 +20,13 @@ def esPar(pnum):
 
 # Definición de Funciones
 def palabraInv(ppalabra):
+    """
+    Funcionalidad: Crea un cifrado al invertir el orden de las palabras.
+    Entradas:
+    -ppalabra(str): La palabra a ser cifrada.
+    Salidas:
+    -palabraInv(str): La palabra inversa.
+    """
     palabraInv = ""
     indice = -1
     for i in ppalabra:
@@ -20,6 +35,13 @@ def palabraInv(ppalabra):
     return palabraInv
 
 def mensajeInv(pfrase):
+    """
+    Funcionalidad: Crea un cifrado al invertir el mensaje ingresado.
+    Entradas:
+    -pfrase(str): El mensaje a ser cifrado.
+    Salidas:
+    -fraseInv(str): El mensaje inverso.
+    """
     fraseInv = ""
     indice = -1
     frase = pfrase.split(" ")
@@ -32,6 +54,13 @@ def mensajeInv(pfrase):
     return fraseInv
 
 def cifBinario(pfrase):
+    """
+    Funcionalidad: Crea un cifrado al convertir la frase ingresada a valores binarios.
+    Entradas:
+    -pfrase(str): El mensaje a ser cifrado.
+    Salidas:
+    -cifrado(str): El mensaje convertido a binario.
+    """
     cifrado = ""
     for i in pfrase:
         for j in i:
@@ -91,7 +120,14 @@ def cifBinario(pfrase):
                 cifrado += "11001 "
     return cifrado
 
-def DescifBinario(pcifrado):
+def descifBinario(pcifrado):
+    """
+    Funcionalidad: Descifra el cifrado del cifrado binario.
+    Entradas:
+    -pcifrado(str): El mensaje cifrado en binario.
+    Salidas:
+    -frase(str): El mensaje descifrado.
+    """
     frase = ""
     cifrado = pcifrado.split(" ")
     for i in cifrado:
@@ -154,6 +190,14 @@ def DescifBinario(pcifrado):
 
 # FALTA EL DESCIFRADO DE ESTA
 def cifPorLlave(pfrase, pllave):
+    """
+    Funcionalidad: Crea un cifrado al adelantar las letras del mensaje según el valor de una llave (palabra clave).
+    Entradas:
+    -pfrase(str): El mensaje a ser cifrado.
+    -pllave(str): La palabra clave que definirá cuantos espacios se deben adelantar las letras del mensaje.
+    Salidas:
+    -cifrado(str): El mensaje convertido a cifrado según la llave.
+    """
     letraPos = 0
     llaveValor = 0
     indice = 0
@@ -183,13 +227,21 @@ def cifPorLlave(pfrase, pllave):
             indice = 0
     return cifrado
 
-def DescifPorLlave(pfrase, pllave):
+def descifPorLlave(pcifrado, pllave):
+    """
+    Funcionalidad: Descifra el cifrado del cifrado por llave al retroceder las letras del cifrado según la llave.
+    Entradas:
+    -pcifrado(str): El mensaje a ser descifrado.
+    -pllave(str): La palabra clave que definirá cuantos espacios se deben retroceder las letras del mensaje.
+    Salidas:
+    -frase(str): El mensaje descifrado.
+    """
     letraPos = 0
     llaveValor = 0
     indice = 0
     alfabeto = "abcdefghijklmnopqrstuvwxyz"
-    cifrado = ""
-    for i in pfrase:
+    frase = ""
+    for i in pcifrado:
         letraPos = 0
         llaveValor = 0
         if indice == len(pllave): # Si el indice de la llave es igual a su longitud se resetea
@@ -207,13 +259,21 @@ def DescifPorLlave(pfrase, pllave):
             indice += 1
             if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
                 letraPos -= 26
-            cifrado += alfabeto[letraPos] # Añade al cifrado la posicion la letra + el valor de la llave
+            frase += alfabeto[letraPos] # Añade al cifrado la posicion la letra + el valor de la llave
         else: # Añade al cifrado un espacio en blanco y reseta el indice
-            cifrado += " "
+            frase += " "
             indice = 0
-    return cifrado
+    return frase
 
 def sustVignere(pfrase, pcifra):
+    """
+    Funcionalidad: Crea un cifrado al adelantar alternadamente las letras del mensaje según el valor de una cifra numérica.
+    Entradas:
+    -pfrase(str): El mensaje a ser cifrado.
+    -pcifra(int): La cifra numérica que definirá cuantos espacios se deben adelantar las letras del mensaje.
+    Salidas:
+    -cifrado(str): El mensaje convertido a cifrado según la cifra numérica.
+    """
     cifra = str(pcifra)
     letraPos = 0
     contador = 1
@@ -238,13 +298,21 @@ def sustVignere(pfrase, pcifra):
             cifrado += " "
     return cifrado
 
-def DescifSustVignere(pfrase, pcifra):
+def descifSustVignere(pcifrado, pcifra):
+    """
+    Funcionalidad: Descifra el cifrado de la sustitución Vignére al retroceder las letras del cifrado según la cifra numérica.
+    Entradas:
+    -pcifrado(str): El mensaje a ser descifrado.
+    -pllave(str): La palabra clave que definirá cuantos espacios se deben retroceder las letras del mensaje.
+    Salidas:
+    -frase(str): El mensaje descifrado.
+    """
     cifra = str(pcifra)
     letraPos = 0
     contador = 1
     alfabeto = "abcdefghijklmnopqrstuvwxyz"
-    cifrado = ""
-    for i in pfrase:
+    frase = ""
+    for i in pcifrado:
         letraPos = 0
         for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto
             if i == j:
@@ -258,7 +326,7 @@ def DescifSustVignere(pfrase, pcifra):
             elif esPar(contador) == True:
                 letraPos -= int(cifra[-1])
             contador += 1
-            cifrado += alfabeto[letraPos] # Añade al cifrado la posicion de cada letra obtenida en el alfabeto + el digito de la cifra
+            frase += alfabeto[letraPos] # Añade al cifrado la posicion de cada letra obtenida en el alfabeto + el digito de la cifra
         else: # Añade al cifrado un espacio en blanco
-            cifrado += " "
-    return cifrado
+            frase += " "
+    return frase
