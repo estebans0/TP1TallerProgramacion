@@ -19,20 +19,168 @@ def esPar(pnum):
         return False
 
 # Definición de Funciones
+def cifPorLlave(pfrase, pllave):
+    """
+    Funcionalidad: Crea un cifrado al adelantar las letras del mensaje según el valor de una llave (palabra clave).
+    Entradas:
+    -pfrase(str): El mensaje a ser cifrado.
+    -pllave(str): La palabra clave que definirá cuantos espacios se deben adelantar las letras del mensaje.
+    Salidas:
+    -cifrado(str): El mensaje convertido a cifrado según la llave.
+    """
+    pfrase = pfrase.lower()
+    letraPos = 0
+    llaveValor = 0
+    indice = 0
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    cifrado = ""
+    for i in pfrase:
+        letraPos = 0
+        llaveValor = 0
+        if indice == len(pllave): # Si el indice de la llave es igual a su longitud se resetea
+            indice = 0
+        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto y le asigna un valor numérico
+            if i == j:
+                break
+            letraPos += 1
+        for j in alfabeto: # Determina el valor de la letra de la llave
+            llaveValor += 1
+            if pllave[indice] == j:
+                break
+        if i in alfabeto: # Verifica si el caracter evaluado se encuentra dentro del alfabeto
+            letraPos += llaveValor
+            indice += 1
+            if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
+                letraPos -= 26
+            cifrado += alfabeto[letraPos] # Añade al cifrado la posicion la letra + el valor de la llave
+        else: # Añade al cifrado un espacio en blanco y reseta el indice
+            cifrado += " "
+            indice = 0
+    return cifrado
+
+def descifPorLlave(pcifrado, pllave):
+    """
+    Funcionalidad: Descifra el cifrado del cifrado por llave al retroceder las letras del cifrado según la llave.
+    Entradas:
+    -pcifrado(str): El mensaje a ser descifrado.
+    -pllave(str): La palabra clave que definirá cuantos espacios se deben retroceder las letras del mensaje.
+    Salidas:
+    -frase(str): El mensaje descifrado.
+    """
+    letraPos = 0
+    llaveValor = 0
+    indice = 0
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    frase = ""
+    for i in pcifrado:
+        letraPos = 0
+        llaveValor = 0
+        if indice == len(pllave): # Si el indice de la llave es igual a su longitud se resetea
+            indice = 0
+        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto y le asigna un valor numérico
+            if i == j:
+                break
+            letraPos += 1
+        for j in alfabeto: # Determina el valor de la letra de la llave
+            llaveValor += 1
+            if pllave[indice] == j:
+                break
+        if i in alfabeto: # Verifica si el caracter evaluado se encuentra dentro del alfabeto
+            letraPos -= llaveValor
+            indice += 1
+            if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
+                letraPos -= 26
+            frase += alfabeto[letraPos] # Añade al cifrado la posicion la letra + el valor de la llave
+        else: # Añade al cifrado un espacio en blanco y reseta el indice
+            frase += " "
+            indice = 0
+    return frase
+
+def sustVignere(pfrase, pcifra):
+    """
+    Funcionalidad: Crea un cifrado al adelantar alternadamente las letras del mensaje según el valor de una cifra numérica.
+    Entradas:
+    -pfrase(str): El mensaje a ser cifrado.
+    -pcifra(int): La cifra numérica que definirá cuantos espacios se deben adelantar las letras del mensaje.
+    Salidas:
+    -cifrado(str): El mensaje convertido a cifrado según la cifra numérica.
+    """
+    pfrase = pfrase.lower()
+    cifra = str(pcifra)
+    letraPos = 0
+    contador = 1
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    cifrado = ""
+    for i in pfrase:
+        letraPos = 0
+        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto
+            if i == j:
+                break
+            letraPos += 1
+        if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
+            letraPos -= 26
+        if i in alfabeto: # Determina si la letra es par o impar para saber cual cifra utilizar
+            if esPar(contador) == False:
+                letraPos += int(cifra[0])
+            elif esPar(contador) == True:
+                letraPos += int(cifra[-1])
+            contador += 1
+            cifrado += alfabeto[letraPos] # Añade al cifrado la posicion de cada letra obtenida en el alfabeto + el digito de la cifra
+        else: # Añade al cifrado un espacio en blanco
+            cifrado += " "
+    return cifrado
+
+def descifSustVignere(pcifrado, pcifra):
+    """
+    Funcionalidad: Descifra el cifrado de la sustitución Vignére al retroceder las letras del cifrado según la cifra numérica.
+    Entradas:
+    -pcifrado(str): El mensaje a ser descifrado.
+    -pllave(str): La palabra clave que definirá cuantos espacios se deben retroceder las letras del mensaje.
+    Salidas:
+    -frase(str): El mensaje descifrado.
+    """
+    cifra = str(pcifra)
+    letraPos = 0
+    contador = 1
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    frase = ""
+    for i in pcifrado:
+        letraPos = 0
+        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto
+            if i == j:
+                break
+            letraPos += 1
+        if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
+            letraPos -= 26
+        if i in alfabeto: # Determina si la letra es par o impar para saber cual cifra utilizar
+            if esPar(contador) == False:
+                letraPos -= int(cifra[0])
+            elif esPar(contador) == True:
+                letraPos -= int(cifra[-1])
+            contador += 1
+            frase += alfabeto[letraPos] # Añade al cifrado la posicion de cada letra obtenida en el alfabeto + el digito de la cifra
+        else: # Añade al cifrado un espacio en blanco
+            frase += " "
+    return frase
+
 def palabraInv(ppalabra):
     """
     Funcionalidad: Crea un cifrado al invertir el orden de las palabras.
     Entradas:
     -ppalabra(str): La palabra a ser cifrada.
     Salidas:
-    -palabraInv(str): La palabra inversa.
+    -cifrado(str): La palabra inversa.
     """
-    palabraInv = ""
+    cifrado = ""
     indice = -1
+    ppalabra = ppalabra.split(" ")
     for i in ppalabra:
-        palabraInv += ppalabra[indice]
-        indice -= 1
-    return palabraInv
+        while indice >= -len(i):
+            cifrado += i[indice]
+            indice -= 1
+        indice = -1
+        cifrado += " "
+    return cifrado
 
 def mensajeInv(pfrase):
     """
@@ -40,18 +188,14 @@ def mensajeInv(pfrase):
     Entradas:
     -pfrase(str): El mensaje a ser cifrado.
     Salidas:
-    -fraseInv(str): El mensaje inverso.
+    -cifrado(str): El mensaje inverso.
     """
-    fraseInv = ""
+    cifrado = ""
     indice = -1
-    frase = pfrase.split(" ")
-    for i in frase:
-        if indice == -len(frase):
-            fraseInv += str(palabraInv(frase[indice]))
-        else:
-            fraseInv += str(palabraInv(frase[indice]))+" "
-            indice -= 1
-    return fraseInv
+    for i in pfrase:
+        cifrado += pfrase[indice]
+        indice -= 1
+    return cifrado
 
 def cifBinario(pfrase):
     """
@@ -61,6 +205,7 @@ def cifBinario(pfrase):
     Salidas:
     -cifrado(str): El mensaje convertido a binario.
     """
+    pfrase = pfrase.lower()
     cifrado = ""
     for i in pfrase:
         for j in i:
@@ -187,145 +332,3 @@ def descifBinario(pcifrado):
             frase += "z"
     print(frase)
     return ""
-
-def cifPorLlave(pfrase, pllave):
-    """
-    Funcionalidad: Crea un cifrado al adelantar las letras del mensaje según el valor de una llave (palabra clave).
-    Entradas:
-    -pfrase(str): El mensaje a ser cifrado.
-    -pllave(str): La palabra clave que definirá cuantos espacios se deben adelantar las letras del mensaje.
-    Salidas:
-    -cifrado(str): El mensaje convertido a cifrado según la llave.
-    """
-    letraPos = 0
-    llaveValor = 0
-    indice = 0
-    alfabeto = "abcdefghijklmnopqrstuvwxyz"
-    cifrado = ""
-    for i in pfrase:
-        letraPos = 0
-        llaveValor = 0
-        if indice == len(pllave): # Si el indice de la llave es igual a su longitud se resetea
-            indice = 0
-        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto y le asigna un valor numérico
-            if i == j:
-                break
-            letraPos += 1
-        for j in alfabeto: # Determina el valor de la letra de la llave
-            llaveValor += 1
-            if pllave[indice] == j:
-                break
-        if i in alfabeto: # Verifica si el caracter evaluado se encuentra dentro del alfabeto
-            letraPos += llaveValor
-            indice += 1
-            if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
-                letraPos -= 26
-            cifrado += alfabeto[letraPos] # Añade al cifrado la posicion la letra + el valor de la llave
-        else: # Añade al cifrado un espacio en blanco y reseta el indice
-            cifrado += " "
-            indice = 0
-    return cifrado
-
-def descifPorLlave(pcifrado, pllave):
-    """
-    Funcionalidad: Descifra el cifrado del cifrado por llave al retroceder las letras del cifrado según la llave.
-    Entradas:
-    -pcifrado(str): El mensaje a ser descifrado.
-    -pllave(str): La palabra clave que definirá cuantos espacios se deben retroceder las letras del mensaje.
-    Salidas:
-    -frase(str): El mensaje descifrado.
-    """
-    letraPos = 0
-    llaveValor = 0
-    indice = 0
-    alfabeto = "abcdefghijklmnopqrstuvwxyz"
-    frase = ""
-    for i in pcifrado:
-        letraPos = 0
-        llaveValor = 0
-        if indice == len(pllave): # Si el indice de la llave es igual a su longitud se resetea
-            indice = 0
-        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto y le asigna un valor numérico
-            if i == j:
-                break
-            letraPos += 1
-        for j in alfabeto: # Determina el valor de la letra de la llave
-            llaveValor += 1
-            if pllave[indice] == j:
-                break
-        if i in alfabeto: # Verifica si el caracter evaluado se encuentra dentro del alfabeto
-            letraPos -= llaveValor
-            indice += 1
-            if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
-                letraPos -= 26
-            frase += alfabeto[letraPos] # Añade al cifrado la posicion la letra + el valor de la llave
-        else: # Añade al cifrado un espacio en blanco y reseta el indice
-            frase += " "
-            indice = 0
-    return frase
-
-def sustVignere(pfrase, pcifra):
-    """
-    Funcionalidad: Crea un cifrado al adelantar alternadamente las letras del mensaje según el valor de una cifra numérica.
-    Entradas:
-    -pfrase(str): El mensaje a ser cifrado.
-    -pcifra(int): La cifra numérica que definirá cuantos espacios se deben adelantar las letras del mensaje.
-    Salidas:
-    -cifrado(str): El mensaje convertido a cifrado según la cifra numérica.
-    """
-    cifra = str(pcifra)
-    letraPos = 0
-    contador = 1
-    alfabeto = "abcdefghijklmnopqrstuvwxyz"
-    cifrado = ""
-    for i in pfrase:
-        letraPos = 0
-        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto
-            if i == j:
-                break
-            letraPos += 1
-        if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
-            letraPos -= 26
-        if i in alfabeto: # Determina si la letra es par o impar para saber cual cifra utilizar
-            if esPar(contador) == False:
-                letraPos += int(cifra[0])
-            elif esPar(contador) == True:
-                letraPos += int(cifra[-1])
-            contador += 1
-            cifrado += alfabeto[letraPos] # Añade al cifrado la posicion de cada letra obtenida en el alfabeto + el digito de la cifra
-        else: # Añade al cifrado un espacio en blanco
-            cifrado += " "
-    return cifrado
-
-def descifSustVignere(pcifrado, pcifra):
-    """
-    Funcionalidad: Descifra el cifrado de la sustitución Vignére al retroceder las letras del cifrado según la cifra numérica.
-    Entradas:
-    -pcifrado(str): El mensaje a ser descifrado.
-    -pllave(str): La palabra clave que definirá cuantos espacios se deben retroceder las letras del mensaje.
-    Salidas:
-    -frase(str): El mensaje descifrado.
-    """
-    cifra = str(pcifra)
-    letraPos = 0
-    contador = 1
-    alfabeto = "abcdefghijklmnopqrstuvwxyz"
-    frase = ""
-    for i in pcifrado:
-        letraPos = 0
-        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto
-            if i == j:
-                break
-            letraPos += 1
-        if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
-            letraPos -= 26
-        if i in alfabeto: # Determina si la letra es par o impar para saber cual cifra utilizar
-            if esPar(contador) == False:
-                letraPos -= int(cifra[0])
-            elif esPar(contador) == True:
-                letraPos -= int(cifra[-1])
-            contador += 1
-            frase += alfabeto[letraPos] # Añade al cifrado la posicion de cada letra obtenida en el alfabeto + el digito de la cifra
-        else: # Añade al cifrado un espacio en blanco
-            frase += " "
-    return frase
