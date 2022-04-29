@@ -17,11 +17,19 @@ def cifPorLlaveAux(pfrase, pllave):
     cifPorLlave(): La salida de la función.
     (str): El mensaje de error correspondiente.
     """
-    if isinstance(pfrase, str):
-        if isinstance(pllave, str):
-            return cifPorLlave(pfrase, pllave)
-        return "Ingrese una llave válida."
-    return "Ingrese un mensaje válido."
+    opcion = 0
+    while opcion != 1 and opcion != 2:
+        if isinstance(pfrase, str):
+            if isinstance(pllave, str):
+                print(f"\nSu cifrado es: {cifPorLlave(pfrase, pllave)}")
+                opcion = int(input("\n¿Desea descifrar el mensaje (1) o regresar al menú principal (2)?: "))
+                if opcion == 1:
+                    return f"\nSu descifrado es: {descifPorLlave(cifPorLlave(pfrase, pllave), pllave)}"
+                elif opcion == 2:
+                    break
+            return "Ingrese una llave válida."
+        return "Ingrese un mensaje válido."
+    return ""
 
 def sustVignereAux(pfrase, pcifra):
     """
@@ -33,11 +41,19 @@ def sustVignereAux(pfrase, pcifra):
     sustVignere(): La salida de la función.
     (str): El mensaje de error correspondiente.
     """
-    if isinstance(pfrase, str):
-        if isinstance(pcifra, int):
-            return sustVignere(pfrase, pcifra)
-        return "Ingrese una cifra numérica."
-    return "Ingrese un mensaje válido."
+    opcion = 0
+    while opcion != 1 and opcion != 2:
+        if isinstance(pfrase, str):
+            if isinstance(pcifra, int):
+                print(f"\nSu cifrado es: {sustVignere(pfrase, pcifra)}")
+                opcion = int(input("\n¿Desea descifrar el mensaje (1) o regresar al menú principal (2)?: "))
+                if opcion == 1:
+                    return f"\nSu descifrado es: {descifSustVignere(sustVignere(pfrase, pcifra), pcifra)}"
+                elif opcion == 2:
+                    break
+            return "Ingrese una cifra numérica."
+        return "Ingrese un mensaje válido."
+    return ""
 
 def palabraInvAux(ppalabra):
     """
@@ -48,9 +64,17 @@ def palabraInvAux(ppalabra):
     palabraInv(): La salida de la función.
     (str): El mensaje de error correspondiente.
     """
-    if isinstance(ppalabra, str):
-        return palabraInv(ppalabra)
-    return "Ingrese una palabra válida."
+    opcion = 0
+    while opcion != 1 and opcion != 2:
+        if isinstance(ppalabra, str):
+            print(f"\nSu cifrado es: {palabraInv(ppalabra)}")
+            opcion = int(input("\n¿Desea descifrar el mensaje (1) o regresar al menú principal (2)?: "))
+            if opcion == 1:
+                return f"\nSu descifrado es: {palabraInv(palabraInv(ppalabra))}"
+            elif opcion == 2:
+                break
+        return "\nIngrese una palabra válida."
+    return ""
 
 def mensajeInvAux(pfrase):
     """
@@ -61,9 +85,17 @@ def mensajeInvAux(pfrase):
     mensajeInv(): La salida de la función.
     (str): El mensaje de error correspondiente.
     """
-    if isinstance(pfrase, str):
-        return mensajeInv(pfrase)
-    return "Ingrese una frase válida."
+    opcion = 0
+    while opcion != 1 and opcion != 2:
+        if isinstance(pfrase, str):
+            print(f"\nSu cifrado es: {mensajeInv(pfrase)}")
+            opcion = int(input("\n¿Desea descifrar el mensaje (1) o regresar al menú principal (2)?: "))
+            if opcion == 1:
+                return f"\nSu descifrado es: {mensajeInv(mensajeInv(pfrase))}"
+            elif opcion == 2:
+                break
+        return "Ingrese una frase válida."
+    return ""
 
 def cifBinarioAux(pfrase):
     """
@@ -74,9 +106,17 @@ def cifBinarioAux(pfrase):
     cifBinario(): La salida de la función.
     (str): El mensaje de error correspondiente.
     """
-    if isinstance(pfrase, str):
-        return cifBinario(pfrase)
-    return "Ingrese una frase válida."
+    opcion = 0
+    while opcion != 1 and opcion != 2:
+        if isinstance(pfrase, str):
+            print(f"\nSu cifrado es: {cifBinario(pfrase)}")
+            opcion = int(input("\n¿Desea descifrar el mensaje (1) o regresar al menú principal (2)?: "))
+            if opcion == 1:
+                return f"\nSu descifrado es: {descifBinario(cifBinario(pfrase))}"
+            elif opcion == 2:
+                break
+        return "Ingrese una frase válida."
+    return ""
 
 # Programa Principal
 def opcionCifPorLlave():

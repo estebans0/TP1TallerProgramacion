@@ -163,7 +163,7 @@ def descifSustVignere(pcifrado, pcifra):
             frase += " "
     return frase
 
-def palabraInv(ppalabra):
+def palabraInv(ppalabra): # Se puede reutilizar función para el descifrado
     """
     Funcionalidad: Crea un cifrado al invertir el orden de las palabras.
     Entradas:
@@ -182,7 +182,7 @@ def palabraInv(ppalabra):
         cifrado += " "
     return cifrado
 
-def mensajeInv(pfrase):
+def mensajeInv(pfrase): # Se puede reutilizar función para el descifrado
     """
     Funcionalidad: Crea un cifrado al invertir el mensaje ingresado.
     Entradas:
@@ -330,5 +330,4 @@ def descifBinario(pcifrado):
             frase += "y"
         elif i == "11001":
             frase += "z"
-    print(frase)
-    return ""
+    return frase
