@@ -201,41 +201,44 @@ def menu():
     Entradas: NA
     Salidas: Resultado según lo solicitado.
     """
-    print("\n**************************")
-    print("Tarea Programada 1")
-    print("**************************")
-    print("1. Cifrado César")
-    print("2. Cifrado por llave")
-    print("3. Sustitución Vignére")
-    print("4. Sustitución XOR y llave")
-    print("5. Palabra inversa")
-    print("6. Mensaje inverso")
-    print("7. Cifrado telefónico")
-    print("8. Cifrado binario")
-    print("0. Terminar")
-    opcion = int(input("\nEscoja una opción: "))
-    if opcion >=0 and opcion <=8:
-        if opcion == 1:
-            "En desarrollo..."
-        elif opcion == 2 :
-            opcionCifPorLlave()
-        elif opcion == 3:
-            opcionSustVignere()
-        elif opcion == 4:
-            "En desarrollo..."
-        elif opcion == 5:
-            opcionPalabraInv()
-        elif opcion == 6:
-            opcionMensajeInv()
-        elif opcion == 7:
-            "En desarrollo..."
-        elif opcion == 8:
-            opcionCifBinario()
+    try:
+        print("\n**************************")
+        print("Tarea Programada 1")
+        print("**************************")
+        print("1. Cifrado César")
+        print("2. Cifrado por llave")
+        print("3. Sustitución Vignére")
+        print("4. Sustitución XOR y llave")
+        print("5. Palabra inversa")
+        print("6. Mensaje inverso")
+        print("7. Cifrado telefónico")
+        print("8. Cifrado binario")
+        print("0. Terminar")
+        opcion = int(input("\nEscoja una opción: "))
+        if opcion >=0 and opcion <=8:
+            if opcion == 1:
+                "En desarrollo..."
+            elif opcion == 2 :
+                opcionCifPorLlave()
+            elif opcion == 3:
+                opcionSustVignere()
+            elif opcion == 4:
+                "En desarrollo..."
+            elif opcion == 5:
+                opcionPalabraInv()
+            elif opcion == 6:
+                opcionMensajeInv()
+            elif opcion == 7:
+                "En desarrollo..."
+            elif opcion == 8:
+                opcionCifBinario()
+            else:
+                return
         else:
-            return
-    else:
-        print ("Opción inválida, indique una opción según las opciones indicadas.")
-    menu()
+            print ("Opción inválida, indique una opción según las opciones indicadas.")
+        menu()
+    except ValueError:
+        print("Debe ingresar únicamente un valor numérico entero entre 0 y 8.")
 
 #Programa Principal
 menu()
