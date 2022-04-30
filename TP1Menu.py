@@ -7,6 +7,27 @@
 from TP1Funciones import *
 
 # Definición de Validaciones
+def cifCesarAux(pfrase):
+    """
+    Funcionamiento: Valida que la entrada cumpla con la condiciones necesarias.
+    Entradas:
+    -pfrase(str): El mensaje a ser cifrado.
+    Salidas:
+    cifCesar(): La salida de la función.
+    (str): El mensaje de error correspondiente.
+    """
+    opcion = 0
+    while opcion != 1 and opcion != 2:
+        if isinstance(pfrase, str):
+            print(f"\nSu cifrado es: {cifCesar(pfrase)}")
+            opcion = int(input("\n¿Desea descifrar el mensaje (1) o regresar al menú principal (2)?: "))
+            if opcion == 1:
+                return f"\nSu descifrado es: {descifCesar(cifCesar(pfrase))}"
+            elif opcion == 2:
+                break
+        return "Ingrese un mensaje válido."
+    return ""
+
 def cifPorLlaveAux(pfrase, pllave):
     """
     Funcionamiento: Valida que la entrada cumpla con la condiciones necesarias.
@@ -118,7 +139,42 @@ def cifBinarioAux(pfrase):
         return "Ingrese una frase válida."
     return ""
 
+def cifCodTelAux(pfrase):
+    """
+    Funcionamiento: Valida que la entrada cumpla con la condiciones necesarias.
+    Entradas:
+    pfrase(str): La frase ingresada por el usuario.
+    Salidas:
+    cifCodTel(): La salida de la función.
+    (str): El mensaje de error correspondiente.
+    """
+    opcion = 0
+    while opcion != 1 and opcion != 2:
+        if isinstance(pfrase, str):
+            print(f"\nSu cifrado es: {cifCodTel(pfrase)}")
+            opcion = int(input("\n¿Desea descifrar el mensaje (1) o regresar al menú principal (2)?: "))
+            if opcion == 1:
+                return f"\nSu descifrado es: {descifCodTel(cifCodTel(pfrase))}"
+            elif opcion == 2:
+                break
+        return "Ingrese una frase válida."
+    return ""
+
 # Programa Principal
+def opcionCifCesar():
+    """
+    Funcionamiento: Recibe la entrada para realizar el cifrado César.
+    Salidas: NA
+    """
+    try:
+        print ("\n------------------------")
+        print ("Cifrado César")
+        print ("------------------------")
+        frase = input("Ingrese el mensaje que desea cifrar: ")
+        return print(cifCesarAux(frase))
+    except ValueError:
+        return "Ingrese valores válidos."
+
 def opcionCifPorLlave():
     """
     Funcionamiento: Recibe la entrada para realizar el cifrado por llave.
@@ -195,6 +251,21 @@ def opcionCifBinario():
     except ValueError:
         return "Ingrese una frase válida."
 
+def opcionCifCodTel():
+    """
+    Funcionamiento: Recibe la entrada para realizar el cifrado de código telefónico.
+    Entradas: NA
+    Salidas: NA
+    """
+    try:
+        print ("\n------------------------")
+        print ("Cifrado de código telefónico")
+        print ("------------------------")
+        frase = input("Ingrese una frase: ")
+        return print(cifCodTelAux(frase))
+    except ValueError:
+        return "Ingrese una frase válida."
+
 def menu():
     """
     Funcionamiento: De manera repetitiva, muestra el menú al usuario.
@@ -211,13 +282,13 @@ def menu():
         print("4. Sustitución XOR y llave")
         print("5. Palabra inversa")
         print("6. Mensaje inverso")
-        print("7. Cifrado telefónico")
+        print("7. Cifrado de código telefónico")
         print("8. Cifrado binario")
         print("0. Terminar")
         opcion = int(input("\nEscoja una opción: "))
         if opcion >=0 and opcion <=8:
             if opcion == 1:
-                "En desarrollo..."
+                opcionCifCesar()
             elif opcion == 2 :
                 opcionCifPorLlave()
             elif opcion == 3:
@@ -229,10 +300,11 @@ def menu():
             elif opcion == 6:
                 opcionMensajeInv()
             elif opcion == 7:
-                "En desarrollo..."
+                opcionCifCodTel()
             elif opcion == 8:
                 opcionCifBinario()
             else:
+                print("\n¡Muchas gracias por usar el sistema!")
                 return
         else:
             print ("Opción inválida, indique una opción según las opciones indicadas.")

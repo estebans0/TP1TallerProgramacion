@@ -19,6 +19,56 @@ def esPar(pnum):
         return False
 
 # Definición de Funciones
+def cifCesar(pfrase):
+    """
+    Funcionalidad: Crea un cifrado al adelantar las letras del mensaje 3 posiciones.
+    Entradas:
+    -pfrase(str): El mensaje a ser cifrado.
+    Salidas:
+    -cifrado(str): El mensaje convertido a cifrado.
+    """
+    pfrase = pfrase.upper()
+    alfabeto = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+    cifrado = ""
+    for i in pfrase:
+        letraPos = 0
+        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto y le asigna un valor numérico
+            if i == j:
+                break
+            letraPos += 1
+        if i in alfabeto:
+            if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
+                letraPos -= 26
+            cifrado += alfabeto[letraPos+3] # Añade al cifrado la posicion la letra + 3
+        else: # Añade al cifrado un espacio en blanco y reseta el indice
+            cifrado += " "
+    return cifrado
+
+def descifCesar(pcifrado):
+    """
+    Funcionalidad: Descifra el cifrado del cifrado por llave al retroceder 3 posiciones las letras del cifrado.
+    Entradas:
+    -pcifrado(str): El mensaje a ser descifrado.
+    Salidas:
+    -frase(str): El mensaje descifrado.
+    """
+    pcifrado = pcifrado.lower()
+    alfabeto = "abcdefghijklmnopqrstuvwxyz"
+    frase = ""
+    for i in pcifrado:
+        letraPos = 0
+        for j in alfabeto: # Determina la posición de cada letra de la frase en el alfabeto y le asigna un valor numérico
+            if i == j:
+                break
+            letraPos += 1
+        if i in alfabeto:
+            if letraPos > 25: # En caso de superar la cantidad de letras del alfabeto, restar 26
+                letraPos -= 26
+            frase += alfabeto[letraPos-3] # Añade al cifrado la posicion la letra - 3
+        else: # Añade al cifrado un espacio en blanco y reseta el indice
+            frase += " "
+    return frase
+
 def cifPorLlave(pfrase, pllave):
     """
     Funcionalidad: Crea un cifrado al adelantar las letras del mensaje según el valor de una llave (palabra clave).
@@ -330,4 +380,93 @@ def descifBinario(pcifrado):
             frase += "y"
         elif i == "11001":
             frase += "z"
+    return frase
+
+def cifCodTel(pfrase):
+    """
+    Funcionalidad: Crea un cifrado al asignar a cada letra un valor de código telefónico.
+    Entradas:
+    -pfrase(str): El mensaje a ser cifrado.
+    Salidas:
+    -cifrado(str): El mensaje convertido a cifrado.
+    """
+    pfrase = pfrase.lower()
+    abecedario = ""
+    cifrado = ""
+    num = 0
+    posLetra = 0
+    for i in pfrase:
+        if i in "abcdefghijklmnopqrstuvwxyz":
+            posLetra = 0
+            if i in "abc":
+                abecedario = "abc"
+                num = "2"
+            elif i in "def":
+                abecedario = "def"
+                num = "3"
+            elif i in "ghi":
+                abecedario = "ghi"
+                num = "4"
+            elif i in "jkl":
+                abecedario = "jkl"
+                num = "5"
+            if i in "mno":
+                abecedario = "mno"
+                num = "6"
+            elif i in "pqrs":
+                abecedario = "pqrs"
+                num = "7"
+            elif i in "tuv":
+                abecedario = "tuv"
+                num = "8"
+            elif i in "wxyz":
+                abecedario = "wxyz"
+                num = "9"
+            for j in abecedario:
+                posLetra += 1
+                if i == j:
+                    break
+            cifrado += num+str(posLetra)+" "
+        elif i == " ":
+            cifrado += "* "
+    return cifrado
+
+def descifCodTel(pcifrado):
+    """
+    Funcionalidad: Descifra el cifrado del cifrado por código telefónico.
+    Entradas:
+    -pcifrado(str): El mensaje cifrado en código telefónico.
+    Salidas:
+    -frase(str): El mensaje descifrado.
+    """
+    pcifrado = pcifrado.split(" ")
+    abecedario = ""
+    frase = ""
+    posLetra = 0
+    for i in pcifrado:
+        if i.isdigit():
+            posLetra = 0
+            if i[0] == "2":
+                abecedario = "abc"
+            elif i[0] == "3":
+                abecedario = "def"
+            elif i[0] == "4":
+                abecedario = "ghi"
+            elif i[0] == "5":
+                abecedario = "jkl"
+            if i[0] == "6":
+                abecedario = "mno"
+            elif i[0] == "7":
+                abecedario = "pqrs"
+            elif i[0] == "8":
+                abecedario = "tuv"
+            elif i[0] == "9":
+                abecedario = "wxyz"
+            for j in abecedario:
+                posLetra += 1
+                if posLetra == int(i[1]):
+                    break
+            frase += j
+        elif i == "*":
+            frase += " "
     return frase
