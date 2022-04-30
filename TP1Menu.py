@@ -76,17 +76,20 @@ def sustVignereAux(pfrase, pcifra):
         return "Ingrese un mensaje válido."
     return ""
 
-def xorYLlaveAux(pfrase):
+def xorYLlaveAux(pfrase, pllave):
     """
     Funcionamiento: Valida que la entrada cumpla con la condiciones necesarias.
     Entradas:
     pfrase(str): El mensaje ingresado por el usuario.
+    pllave(str): La palabra clave la cual servirá para realizar el calculo XOR.
     Salidas:
     xorYLlave(): La salida de la función.
     (str): El mensaje de error correspondiente.
     """
     if isinstance(pfrase, str):
-        return xorYLlave(pfrase)
+        if isinstance(pllave, str):
+            return xorYLlave(pfrase, pllave)
+        return "Ingrese una llave válida."
     return "Ingrese un mensaje válido."
 
 def palabraInvAux(ppalabra):
@@ -230,7 +233,8 @@ def opcionXorYLlave():
         print ("XOR y llave")
         print ("------------------------")
         frase = input("Ingrese el mensaje que desea cifrar: ")
-        return print(xorYLlaveAux(frase))
+        llave = input("Ingrese la llave que usará para cifrar su mensaje: ")
+        return print(xorYLlaveAux(frase, llave))
     except ValueError:
         return "Ingrese un valor válido."
 

@@ -216,18 +216,26 @@ def descifSustVignere(pcifrado, pcifra):
             frase += " "
     return frase
 
-def xorYLlave(pfrase):
+def xorYLlave(pfrase, pllave):
     """
     Funcionalidad: Crea un cifrado usando el método XOR y llave.
     Entradas:
     -pfrase(str): El mensaje a ser cifrada.
+    -pllave(str): La palabra clave la cual servirá para realizar el calculo XOR.
     Salidas:
     -(str): El cifrado.
     """
-    num = [ord(char) for char in pfrase]
-    llave = secrets.choice(range(128))
-    lista = [n ^ llave for n in num]
-    return [" ".join([n.to_bytes((n.bit_length() + 7) // 8, "big").decode() for n in lista]), llave]
+    asciiAXor = 0
+    indiceLlave = 0
+    cifrado = []
+    for i in range(len(pfrase)):
+        asciiAXor = ord(pfrase[i]) ^ ord(
+            pllave[indiceLlave])  # Convierte las entradas tipo string a sus valores ASCII y realiza la operación ^.
+        indiceLlave += 1
+        cifrado += chr(asciiAXor)
+        if indiceLlave >= len(pllave):  # Resetea el valor de la llave una vez haya alcanzado su largo.
+            indiceLlave = 0
+    return cifrado
 
 def palabraInv(ppalabra): # Se puede reutilizar función para el descifrado
     """
