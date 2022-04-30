@@ -273,9 +273,9 @@ def menu():
     Salidas: Resultado según lo solicitado.
     """
     try:
-        print("\n**************************")
+        print("\n************************************")
         print("Tarea Programada 1")
-        print("**************************")
+        print("************************************")
         print("1. Cifrado César")
         print("2. Cifrado por llave")
         print("3. Sustitución Vignére")
