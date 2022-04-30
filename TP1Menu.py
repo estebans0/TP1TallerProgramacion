@@ -76,6 +76,19 @@ def sustVignereAux(pfrase, pcifra):
         return "Ingrese un mensaje válido."
     return ""
 
+def xorYLlaveAux(pfrase):
+    """
+    Funcionamiento: Valida que la entrada cumpla con la condiciones necesarias.
+    Entradas:
+    pfrase(str): El mensaje ingresado por el usuario.
+    Salidas:
+    xorYLlave(): La salida de la función.
+    (str): El mensaje de error correspondiente.
+    """
+    if isinstance(pfrase, str):
+        return xorYLlave(pfrase)
+    return "Ingrese un mensaje válido."
+
 def palabraInvAux(ppalabra):
     """
     Funcionamiento: Valida que la entrada cumpla con la condiciones necesarias.
@@ -204,7 +217,22 @@ def opcionSustVignere():
         cifra = int(input("Ingrese la cifra que usará para cifrar su mensaje: "))
         return print(sustVignereAux(frase, cifra))
     except ValueError:
-        return "Ingrese unvalores válidos."
+        return "Ingrese valores válidos."
+
+def opcionXorYLlave():
+    """
+    Funcionamiento: Recibe la entrada para realizar el cifrado XOR y llave.
+    Entradas: NA
+    Salidas: NA
+    """
+    try:
+        print ("\n------------------------")
+        print ("XOR y llave")
+        print ("------------------------")
+        frase = input("Ingrese el mensaje que desea cifrar: ")
+        return print(xorYLlaveAux(frase))
+    except ValueError:
+        return "Ingrese un valor válido."
 
 def opcionPalabraInv():
     """
@@ -294,7 +322,7 @@ def menu():
             elif opcion == 3:
                 opcionSustVignere()
             elif opcion == 4:
-                "En desarrollo..."
+                opcionXorYLlave()
             elif opcion == 5:
                 opcionPalabraInv()
             elif opcion == 6:

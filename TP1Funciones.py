@@ -3,6 +3,9 @@
 # Fecha de última Modificación: 11/04/2022 01:37pm
 # Versión: 3.9.2
 
+# Importación de librerías
+import secrets
+
 # Librería de funciones
 def esPar(pnum):
     """
@@ -212,6 +215,19 @@ def descifSustVignere(pcifrado, pcifra):
         else: # Añade al cifrado un espacio en blanco
             frase += " "
     return frase
+
+def xorYLlave(pfrase):
+    """
+    Funcionalidad: Crea un cifrado usando el método XOR y llave.
+    Entradas:
+    -pfrase(str): El mensaje a ser cifrada.
+    Salidas:
+    -(str): El cifrado.
+    """
+    num = [ord(char) for char in pfrase]
+    llave = secrets.choice(range(128))
+    lista = [n ^ llave for n in num]
+    return [" ".join([n.to_bytes((n.bit_length() + 7) // 8, "big").decode() for n in lista]), llave]
 
 def palabraInv(ppalabra): # Se puede reutilizar función para el descifrado
     """
